@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>My First Skill</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f9; }
+        #status { color: #666; font-size: 0.8em; margin-bottom: 10px; }
+        #display { font-weight: bold; color: #333; border: 1px solid #ccc; padding: 10px; border-radius: 5px; background: white; }
+    </style>
+</head>
 <body>
-  <div id="display">Waiting for AI...</div>
+  <div id="status">Bridge: Initializing...</div>
+  <div id="display">Waiting for Pablo's command...</div>
 
   <script src="https://google-ai-edge.github.io/gallery/skills/bridge.js"></script>
+
   <script>
-    // This listens for commands from the Gemma 4 model
-    window.skillBridge.onCommand((command, params) => {
-      if (command === 'log_entry') {
-        document.getElementById('display').innerText = "AI says: " + params.text;
-        return { status: "success" }; // Tell the AI it worked
+    // 1. Ensure the bridge is loaded before using it
+    window.addEventListener('load', () => {
+      if (window.skillBridge) {
+        document.getElementById('status').innerText = "Bridge: Ready";
+        
+        // 2. Register the command listener
+        window.skillBridge.onCommand((command, params) => {
+          console.log("Received command:", command, params);
+          
+          if (command === 'log_entry') {
+            document.getElementById('display').innerText = params.text;
+            
+            // 3. IMPORTANT: Always return a response object to the AI
+            return { 
+              status: "success", 
+              message: "Entry logged successfully" 
+            };
+          }
+          
+          return { status: "error", message: "Unknown command" };
+        });
+      } else {
+        document.getElementById('status').innerText = "Bridge: Failed to load";
       }
     });
   </script>
