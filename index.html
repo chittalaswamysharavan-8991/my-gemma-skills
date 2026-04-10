@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div id="display">Waiting for AI...</div>
+
+  <script src="https://google-ai-edge.github.io/gallery/skills/bridge.js"></script>
+  <script>
+    // This listens for commands from the Gemma 4 model
+    window.skillBridge.onCommand((command, params) => {
+      if (command === 'log_entry') {
+        document.getElementById('display').innerText = "AI says: " + params.text;
+        return { status: "success" }; // Tell the AI it worked
+      }
+    });
+  </script>
+</body>
+</html>
