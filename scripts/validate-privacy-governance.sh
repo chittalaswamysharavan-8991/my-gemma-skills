@@ -5,7 +5,7 @@
 set -euo pipefail
 
 readonly TARGETS=("README.md" "SKILL.md")
-readonly FORBIDDEN_PATTERN='pablo|sharavan|hyderabad|nanda|hyrox|salesforce|nandi|world of pablo|a\\.r\\. rahman|pedda cheruvu|notion'
+readonly FORBIDDEN_PATTERN='pablo|sharavan|hyderabad|nanda|hyrox|salesforce|nandi|world of pablo|a[.]r[.] rahman|pedda cheruvu|notion'
 
 for target in "${TARGETS[@]}"; do
   if [[ ! -f "$target" ]]; then
