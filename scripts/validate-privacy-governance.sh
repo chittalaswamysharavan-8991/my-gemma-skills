@@ -14,17 +14,17 @@ for target in "${TARGETS[@]}"; do
   fi
 done
 
-if rg --line-number --ignore-case --regexp "$FORBIDDEN_PATTERN" "${TARGETS[@]}"; then
+if grep --line-number --ignore-case --extended-regexp "$FORBIDDEN_PATTERN" "${TARGETS[@]}"; then
   printf '%s\n' 'privacy/governance validation failed: personal or private context detected.' >&2
   exit 1
 fi
 
-if ! rg --quiet --fixed-strings 'legacy, non-canonical' README.md SKILL.md; then
+if ! grep --quiet --fixed-strings 'legacy, non-canonical' README.md SKILL.md; then
   printf '%s\n' 'privacy/governance validation failed: legacy/non-canonical status is missing.' >&2
   exit 1
 fi
 
-if ! rg --quiet --fixed-strings '/SharvaOS/CHATGPT.md' README.md SKILL.md; then
+if ! grep --quiet --fixed-strings '/SharvaOS/CHATGPT.md' README.md SKILL.md; then
   printf '%s\n' 'privacy/governance validation failed: Sharva authority notice is missing.' >&2
   exit 1
 fi
