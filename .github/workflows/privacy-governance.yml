@@ -1,0 +1,19 @@
+name: Privacy governance
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check validator syntax
+        run: bash -n scripts/validate-privacy-governance.sh
+      - name: Validate published content
+        run: bash scripts/validate-privacy-governance.sh
+      - name: Exercise privacy validation
+        run: bash scripts/test-privacy-governance.sh
