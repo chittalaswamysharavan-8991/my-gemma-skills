@@ -21,7 +21,7 @@ copy, extend, or treat this legacy example as a replacement for that contract.
 Run the lightweight privacy/governance check before publishing changes:
 
 ```sh
-./scripts/validate-privacy-governance.sh
+bash scripts/validate-privacy-governance.sh
 ```
 
 The check rejects known direct identifiers and private-context markers in the
